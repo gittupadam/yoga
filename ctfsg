@@ -1,0 +1,68 @@
+clc;
+clear all;
+close all;
+T=3;
+si=input(&#39;Enter your starting index:&#39;);
+ss=input(&#39;Enter your step size:&#39;);
+fi=input(&#39;Enter you final index:&#39;);
+t=si:ss:fi;
+m=1;
+for h=si:ss:fi
+if (h&gt;-1)&amp;&amp;(h&lt;1)
+x(m)=1;
+else
+x(m)=0;
+end
+m=m+1;
+end
+figure(1);
+plot(t,x,&#39;linewidth&#39;,2);
+xlabel(&#39;t&#39;);
+ylabel(&#39;x(t)&#39;);
+title(&#39;Given signal&#39;);
+grid on;
+l=1;
+m=1;
+syms t;
+for h=-10:10
+a(l)=int(exp((-1i*h*2*pi*t)/T),t,-1,1);
+a(l)=a(l)/3;
+ma(l)=sqrt(real(a(l)).^2 + imag(a(l)).^2);
+p(l)=atan(imag(ma(l))/real(ma(l)));
+l=l+1;
+m=m+1;
+end
+h=-10:10;
+figure(2);
+
+stem(h,a,&#39;linewidth&#39;,2);
+xlabel(&#39;k&#39;);
+ylabel(&#39;ak&#39;);
+title(&#39;Fourier series coefficient&#39;);
+grid on;
+figure(3);
+stem(h,ma,&#39;linewidth&#39;,2);
+xlabel(&#39;k&#39;);
+ylabel(&#39;|ak|&#39;);
+title(&#39;Magnitude spectrum&#39;);
+grid on;
+figure(4);
+stem(h,p,&#39;linewidth&#39;,2);
+xlabel(&#39;k&#39;);
+ylabel(&#39;p&#39;);
+title(&#39;Phase spectrum&#39;);
+grid on;
+GIBBS
+grid on;
+clc;
+clear all;
+close all;
+x=linspace(-3*pi,3*pi,500);
+k=0.*x
+t=input(&#39;Enter Number of terms:&#39;)
+for a=1:t
+k=k+(2/(a*pi)*(sin((2*a*pi)/3))*(cos((2*a*pi*x)/3)));
+figure(a);
+plot(x,k);xlabel(&#39;Time&#39;);ylabel(&#39;Amplitude&#39;);grid on;
+title([&#39;Fourier series synthesis of signal:&#39;,int2str(a),&#39;th term&#39;]);
+end

@@ -1,0 +1,37 @@
+syms x;
+syms y;
+t=-10:10;
+j=sqrt(-1);
+om=-2*pi:0.1:2*pi;
+v=-11:0.1:11;
+xt=[]
+
+FT=[];
+%PLOT OF SIGNAL
+for i=1:length(t)
+if(t(i)&gt;=-3) &amp;&amp; (t(i)&lt;=3)
+xt(i)=1;
+else
+xt(i)=0;
+end
+end
+subplot(2,2,1);
+stem(t,xt,&#39;LineWidth&#39;,3);
+xlabel(&#39;t----&gt;&#39;);ylabel(&#39;Amplitude----&gt;&#39;);title(&#39;PLOT FOR SIGNAL&#39;);
+axis([-7 7 0 1.3]);
+%plot for fourier transforms
+for i=1:length(v)
+fd=0;
+for id=0:(length([-3:3])-1)
+fd=fd+exp(-j*v(i)*(id-3))
+end
+FT(i)=fd
+end
+subplot(2,2,2);plot(v,FT,&#39;LineWidth&#39;,3);xlabel(&#39;v&#39;);ylabel(&#39;amplitude&#39;);title(&#39;fourier transforms of
+given signal&#39;);grid on;
+%plot of magnitude spectra
+subplot(2,2,3);plot(v,abs(FT),&#39;LineWidth&#39;,3);xlabel(&#39;v&#39;);ylabel(&#39;magnitude&#39;);title(&#39;magnitude spectra
+of given signal&#39;);grid on;
+disp(&#39;Synthesis for dtft:&#39;)
+disp(&#39;The synthesis spectrum will exist from - infinity to +infinity and so the spectrum will not be
+clear&#39;)

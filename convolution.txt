@@ -1,5 +1,5 @@
 function main()
-x=input(&#39;Enter the array x&#39;,&#39;s&#39;);
+x=input('Enter the array x&#39;,&#39;s&#39;);
 llx=input(&#39;Enter the lower limit of x&#39;);
 ulx=input(&#39;Enter the upper limit of x&#39;);
 h=input(&#39;Enter the array h&#39;,&#39;s&#39;);

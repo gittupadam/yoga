@@ -1,0 +1,304 @@
+%CT_Exp Function case1
+t=0:0.001:2;
+y0=exp(5*t);
+subplot(2,2,1);plot(t,y0, &#39;linewidth&#39; ,2);grid on;
+xlabel(&#39;t&#39;);
+ylabel(&#39;x(t)&#39;);
+title(&#39;exp function:1 y0=e^5t, a&gt;1&#39;);
+%CT_Exp Function case2
+t=0:0.001:5;
+y1=2*exp(0.7*t);
+subplot(2,2,2);plot(t,y1 ,&#39;linewidth&#39;,2);grid on;
+xlabel(&#39;t&#39;);
+ylabel(&#39;x(t)&#39;);
+title(&#39;exp function:2 y1=2e^0.7t, a&lt;1&#39;);
+%CT_Exp Function case3
+t=0:0.001:5;
+y2=4*exp(-0.4*t);
+subplot(2,2,3);plot(t,y2 ,&#39;linewidth&#39;,2);grid on;
+xlabel(&#39;t&#39;);
+ylabel(&#39;x(t)&#39;);
+title(&#39;exp function:3 y2=4e^0.4t, -1&lt;a&lt;0&#39;);
+%CT_Exp Function case4
+t=0:0.001:1;
+y3=exp(-2*t);
+subplot(2,2,4);plot(t,y3 ,&#39;linewidth&#39;,2);grid on;
+xlabel(&#39;t&#39;);
+ylabel(&#39;x(t)&#39;);
+title(&#39;exp function:4 y3=e^-2t , a&lt;-1&#39;);
+%CT_Sine Function
+t= 0:0.001:0.1;
+y4= sin(20*pi*t);
+subplot(2,2,1);plot(t,y4, &#39;linewidth&#39;,2);grid on;
+xlabel(&#39;t&#39;)
+ylabel(&#39;sine(t)&#39;)
+title(&#39;Sinusoidal function&#39;)
+
+%CT_Unit Impulse function
+t1=-10:0.01:10;
+m1=1;
+y5=zeros(size(t1));
+for i=t1
+if i==0
+y5(m1)=1;
+else
+y5(m1)=0;
+end
+m1=m1+1;
+end
+subplot(2,2,2);plot(t1,y5,&#39;linewidth&#39;,2);
+xlabel(&#39;time&#39;);axis([-2 2 -2 2]);grid on;
+ylabel(&#39;u(t)&#39;);
+title(&#39;Unit impulse function&#39;);
+%CT_Unit Step
+t1=-10:0.01:10;
+m1=1;
+y6=zeros(size(t1));
+for i=t1
+if i&lt;0
+y6(m1)=0;
+else
+y6(m1)=1;
+end
+m1=m1+1;
+end
+subplot(2,2,3);plot(t1,y6,&#39;linewidth&#39;,2);grid on;axis([-2 2 -2 2]);
+xlabel(&#39;time&#39;);
+ylabel(&#39;step(t)&#39;);
+title(&#39;Unit step function&#39;);
+%CT_Unit square function
+t1=-10:0.01:10;
+m1=1;
+y7=zeros(size(t1));
+for i=t1
+if i&gt;0 &amp;&amp; i&lt;1
+
+y7(m1)=1;
+else
+y7(m1)=0;
+end
+m1=m1+1;
+end
+subplot(2,2,4);plot(t1,y7,&#39;linewidth&#39;,2);grid on;axis([-2 2 -2 2]);
+xlabel(&#39;time&#39;);
+ylabel(&#39;sqr(t)&#39;);
+title(&#39;Unit square function&#39;);
+%CT_Unit triangle function
+t1=-10:0.01:10;
+m1=1;
+y8=zeros(size(t1));
+for i=t1
+if i&gt;-1 &amp;&amp; i&lt;1
+y8(m1)=1-abs(i);
+else
+y8(m1)=0;
+end
+m1=m1+1;
+end
+subplot(2,2,1);plot(t1,y8,&#39;linewidth&#39;,2);
+axis([-10 10 -2 2]);grid on;
+xlabel(&#39;time&#39;);
+ylabel(&#39;tri(t)&#39;);
+title(&#39;Unit triangle function&#39;);
+%CT_Unit ramp function
+t1=-10:0.01:10;
+m1=1;
+y9=zeros(size(t1));
+for i=t1
+if i&lt;0
+y9(m1)=0;
+else
+y9(m1)=i;
+end
+m1=m1+1;
+end
+
+subplot(2,2,2);plot(t1,y9,&#39;linewidth&#39;,2);
+grid on;
+xlabel(&#39;time&#39;);
+ylabel(&#39;ramp(t)&#39;);
+title(&#39;Unit ramp function&#39;);
+%CT_Signum function
+t1=-10:0.01:10;
+m1=1;
+y10=zeros(size(t1));
+for i=t1
+if i&lt;0
+y10(m1)=-1;
+else if i&gt;0
+y10(m1)=1;
+else
+y10(m1)=0;
+end
+end
+m1=m1+1;
+end
+subplot(2,2,3);plot(t1,y10,&#39;linewidth&#39;,2);
+axis([-10 10 -2 2]);grid on;
+xlabel(&#39;time&#39;);
+ylabel(&#39;signum(t)&#39;);
+title(&#39;Unit signum function&#39;);
+%CT_Sinc function
+t= -5:0.05:5;
+y11=sin(pi*t)./(pi*t);
+subplot(2,2,4);
+plot(t,y11, &#39;linewidth&#39;,2)
+xlabel(&#39;t&#39;)
+ylabel(&#39;sinc(t)&#39;);axis([-4 4 -1.5 1.5]);
+title(&#39;Sinc Function&#39;)
+grid on;
+%DT_Exp Function case1
+n=-5:1:5;
+y0=power(2,n);
+subplot(2,2,1)
+
+stem(n,y0 ,&#39;linewidth&#39;,2);
+xlabel(&#39;n&#39;);
+ylabel(&#39;x[n]&#39;);grid on;
+title(&#39;Exponential function:1 y=2^n, a&gt;1&#39;);
+%DT_Exp Function case2
+n=-5:1:5;
+y1=power(0.5,n);
+subplot(2,2,2)
+stem(n,y1 ,&#39;linewidth&#39;,2);
+xlabel(&#39;n&#39;);
+ylabel(&#39;x[n]&#39;);grid on;
+title(&#39;Exponential function:2 y=0.5^n, 0&lt;a&lt;1&#39;);
+%DT_Exp Function case3
+n=0:1:10;
+y2= power(-0.5,n);
+subplot(2,2,3)
+stem(n,y2 ,&#39;linewidth&#39;,2);
+xlabel(&#39;n&#39;);
+ylabel(&#39;x[n]&#39;);grid on;
+title(&#39;Exponential function:3 y=-0.5^n, -1&lt;a&lt;0&#39;);
+%DT_Exp Function case4
+n=0:1:10;
+y3= power(-2,n);
+subplot(2,2,4)
+stem(n,y3 ,&#39;linewidth&#39;,2);
+xlabel(&#39;n&#39;);
+ylabel(&#39;x[n]&#39;);grid on;
+title(&#39;Exponential function:4 y=-2^n, a&lt;-1&#39;);
+%DT_Sine function
+n=0:0.01:0.1;
+y4= sin(20*pi*n);
+subplot(2,2,1)
+stem(n,y4,&#39;linewidth&#39;,2)
+xlabel(&#39;n&#39;);grid on;
+ylabel(&#39;sine[n]&#39;)
+title(&#39;Sinusoidal Function&#39;)
+
+%DT_Unit Impulse function
+n=-10:10;
+m1=1;
+y8=zeros(size(n));
+for i=n
+if i~=0
+y8(1,m1)=0;
+else
+y8(1,m1)=1;
+end
+m1=m1+1;
+end
+subplot(2,2,2);stem(n,y8,&#39;linewidth&#39;,2);
+axis([-2 2 -2 2]);grid on;
+xlabel(&#39;n&#39;);
+ylabel(&#39;u[n]&#39;);
+title(&#39;Unit impulse function&#39;);
+%DT_Unit step function
+n=-10:10;
+m1=1;
+y6=zeros(size(n));
+for i=n
+if i&lt;0
+y6(1,m1)=0;
+else
+y6(1,m1)=1;
+end
+m1=m1+1;
+end
+subplot(2,2,3);stem(n,y6,&#39;linewidth&#39;,2);
+axis([-2 2 -2 2]);grid on;
+xlabel(&#39;n&#39;);
+ylabel(&#39;step[n]&#39;);
+title(&#39;Unit step function&#39;);
+%DT_Unit square function
+n=-10:10;
+m1=1;
+
+y7=zeros(size(n));
+for i=n
+if i&gt;=0 &amp;&amp; i&lt;=1
+y7(1,m1)=1;
+else
+y7(1,m1)=0;
+end
+m1=m1+1;
+end
+subplot(2,2,4);stem(n,y7,&#39;linewidth&#39;,2);
+axis([-2 2 -2 2]);grid on;
+xlabel(&#39;n&#39;);
+ylabel(&#39;sqr[n]&#39;);
+title(&#39;Unit square function&#39;);
+%DT_Unit triangle function
+m1=1;
+y8=zeros(size(n));
+for i=n
+if i&gt;-1 &amp;&amp; i&lt;1
+y8(1,m1)=1-abs(i);
+else
+y8(1,m1)=0;
+end
+m1=m1+1;
+end
+subplot(2,2,1);stem(n,y8,&#39;linewidth&#39;,2);
+xlabel(&#39;n&#39;);
+ylabel(&#39;tri[n]&#39;);grid on;
+title(&#39;Unit triangle function&#39;);
+%DT_Unit ramp function
+n=-10:10;
+m1=1;
+y9=zeros(size(n));
+for i=n
+if i&lt;0
+y9(1,m1)=0;
+else
+y9(1,m1)=i;
+end
+
+m1=m1+1;
+end
+subplot(2,2,2);stem(n,y9,&#39;linewidth&#39;,2);
+xlabel(&#39;n&#39;);
+ylabel(&#39;ramp[n]&#39;);grid on;
+title(&#39;Unit ramp function&#39;);
+%DT_Signum function
+n=-10:10;
+m1=1;
+y10=zeros(size(n));
+for i=n
+if i&lt;0
+y10(1,m1)=-1;
+else if i&gt;0
+y10(1,m1)=1;
+else
+y10(1,m1)=0;
+end
+end
+m1=m1+1;
+end
+subplot(2,2,3);stem(n,y10,&#39;linewidth&#39;,2);
+xlabel(&#39;n&#39;);grid on;
+ylabel(&#39;signum[n]&#39;);
+title(&#39;Signum function&#39;);
+%DT_Sinc function
+n2=-5:0.5:5;
+m1=0;
+n3=[n2,m1]
+y11=[sin(pi*n2)./(pi*n2) ones(size(m1))];
+subplot(2,2,4);stem(n3,y11,&#39;linewidth&#39;,2);
+xlabel(&#39;n&#39;);grid on;
+ylabel(&#39;sinc[n]&#39;);
+title(&#39;Sinc function&#39;);
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$

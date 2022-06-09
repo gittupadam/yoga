@@ -1,0 +1,211 @@
+%CT
+function Exp3CT()
+checklinear();
+check_timevariance();
+end
+%Checking linearity
+function checklinear()
+a=2;b=1;
+t=-10:0.01:10;
+y01=yL(t,1,a,b);
+y02=yL(t,2,a,b);
+%actual output
+subplot(2,2,1);
+plot(t,a*y01+b*y02);
+xlabel(&#39;time&#39;);
+ylabel(&#39;ay1(t)+by2(t)&#39;);
+title({&#39;Checking Linearity&#39;;&#39;Actual output&#39;});
+grid on
+y03=yL(t,3,a,b);
+%expected output
+subplot(2,2,2);
+plot(t,y03);
+xlabel(&#39;time&#39;);
+ylabel(&#39;y(ax1(t)+bx2(t))&#39;);
+title({&#39;Checking Linearity&#39;;&#39;Expected output&#39;});
+grid on
+end
+function [x01]=x01(t)
+x01=t;
+end
+function [x02]=x02(t)
+x02=2*t;
+end
+
+function [yL]=yL(t,p,a,b)
+t3=(t.^2)/3;
+switch p
+case 1
+yL=x01(t3);
+case 2
+yL=x02(t3);
+case 3
+yL=a*x01(t3)+b*x02(t3);
+end
+end
+%Checking time variance
+function check_timevariance()
+t=-10:0.01:10;
+y11=yV(t-1,1);
+y12=yV(t,2);
+%actual output
+subplot(2,2,3);
+plot(t,y11);
+xlabel(&#39;time&#39;);
+ylabel(&#39;y1(t-1)&#39;);
+title({&#39;Checking Time variance&#39;;&#39;Actual output&#39;});
+grid on
+%expected output
+subplot(2,2,4);
+plot(t,y12);
+xlabel(&#39;time&#39;);
+ylabel(&#39;y2(t)&#39;);
+title({&#39;Checking Time variance&#39;;&#39;Expected output&#39;});
+grid on
+end
+function [x11]=x11(t)
+x11=t;
+end
+function [x12]=x12(t)
+x12=x11(t-1);
+end
+function [yV]=yV(t,p)
+t3=(t.^2)/3;
+
+switch p
+case 1
+yV=x11(t3);
+case 2
+yV=x12(t3);
+end
+end
+%DT
+function Exp3DT()
+checklinear();
+check_timevariance();
+end
+%Checking linearity
+function checklinear()
+a=2;b=1;
+n=-2:2;
+y1=yL(n,1,a,b);
+y2=yL(n,2,a,b);
+%actual output
+subplot(2,2,1);
+stem(n(2:5),a*y1+b*y2 ,&#39;linewidth&#39;, 2);
+title({&#39;Checking Linearity&#39;;&#39;Actual output&#39;});
+grid on
+y3=yL(n,3,a,b);
+%expected output
+subplot(2,2,2);
+stem(n(2:5),y3);
+xlabel(&#39;time&#39;);
+ylabel(&#39;y(ax1[n]+bx2[n])&#39;);
+title({&#39;Checking Linearity&#39;;&#39;Expected output&#39;});
+grid on
+end
+function [v]=x1(i)
+p1=3;
+p1=p1+i;
+x1=[-2,-1,0,1,2];
+v=x1(p1);
+end
+function [v]=x2(i)
+p2=3;
+
+p2=p2+i;
+x2=[1,2,3,4,5];
+v=x2(p2);
+end
+function [yL]=yL(n,c,a,b)
+n3=n+1;
+switch c
+case 1
+m=1;
+for i=n3(1):n3(4)
+yL(1,m)=x1(i-1)+2*x1(i);
+m=m+1;
+end
+case 2
+m=1;
+for i=n3(1):n3(4)
+yL(1,m)=x2(i-1)+2*x2(i);
+m=m+1;
+end
+case 3
+m=1;
+p3=3;
+for i=-2:2
+x3(1,m)=a*x1(i)+b*x2(i);
+m=m+1;
+end
+m=4;
+for i=-2:1
+yL(1,m)=x3(p3-i-1)+2*x3(p3-i);
+m=m-1;
+end
+end
+end
+%Checking time variance
+function check_timevariance()
+n=-2:2;
+y1=yV(n,1);
+y2=yV(n,2);
+subplot(2,2,3);
+
+stem(n(2:5)+1,y1); %actual output
+xlabel(&#39;time&#39;);
+ylabel(&#39;y[n-1]&#39;);
+title({&#39;Checking Time variance&#39;;&#39;Actual output&#39;});
+grid on
+subplot(2,2,4);
+stem(n(2:5)+1,y2); %expected output
+xlabel(&#39;time&#39;);
+ylabel(&#39;y2[n]&#39;);
+title({&#39;Checking Time variance&#39;;&#39;Expected output&#39;});
+grid on
+end
+function [v]=x01(i)
+p1=3;
+p1=p1+i;
+x01=[-2,-1,0,1,2];
+v=x01(p1);
+end
+function [yV]=yV(n,c)
+n3=n+2;
+switch c
+case 1
+m=1;
+for i=n3(1):n3(4)
+yV(1,m)=x01(i-2)+2*x01(i-1);
+m=m+1;
+end
+case 2
+m=1;
+for i=n3(1):n3(4)
+yV(1,m)=x01(i-2)+2*x01(i-1);
+m=m+1;
+end
+end
+end
+disp(&#39;For Continuous signal&#39;)
+disp(&#39;Causality:&#39;)
+disp(&#39;The output at any time depends on the present values of the input, Therefore it is a Non-
+Causal System&#39;)
+
+disp(&#39;Stability:&#39;)
+disp(&#39;For all the values of t, The system is stable&#39;)
+disp(&#39;Static and Dynamic:&#39;)
+disp(&#39;The present value of the output depends on the past and present values of the input,
+Therefore the system is dynamic for Discrete Signals&#39;)
+disp(&#39;------------------------------------------------------------------------------------------------------------------------
+---------------------&#39;)
+disp(&#39;For Discrete signal&#39;)
+disp(&#39;Causality:&#39;)
+disp(&#39;The output at any time depends on the past and present values of the input, Therefore it is
+a Causal System&#39;)
+disp(&#39;Stability:&#39;)
+disp(&#39;For all the values of n, The system is stable&#39;)
+disp(&#39;Static and Dynamic:&#39;)
+disp(&#39;The present value of the output depends on the past and present values of the input,
+Therefore the system is dynamic for Discrete Signals&#39;)

@@ -1,1 +1,8 @@
-# yoga
+convolution
+ctfsg
+ctft
+dtfs
+dtft
+generationctdt
+soctdt
+vctdtp

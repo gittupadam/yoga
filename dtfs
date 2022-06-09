@@ -1,0 +1,49 @@
+syms x;
+syms y;
+t=-10:0.0001:10;
+j=sqrt(-1);
+om=-2*pi:0.1:2*pi;
+xt=[]
+FT=[];
+%PLOT OF SIGNAL
+for i=1:length(t)
+if(t(i)&gt;=-5) &amp;&amp; (t(i)&lt;=5)
+xt(i)=1;
+else
+xt(i)=0;
+end
+end
+subplot(2,2,1);
+plot(t,xt,&#39;LineWidth&#39;,3);
+xlabel(&#39;t----&gt;&#39;);ylabel(&#39;Amplitude----&gt;&#39;);title(&#39;PLOT FOR SIGNAL&#39;);
+axis([-7 7 0 1.3]);
+%PLOT OF fourier transforms
+for i=1:length(om)
+ftc=int(exp(-j*om(i)*y),y,-5,5);
+FT(i)=ftc;
+
+end
+subplot(2,2,2);
+plot(om,FT,&#39;LineWidth&#39;,2);
+xlabel(&#39;omega&#39;);ylabel(&#39;amplitude&#39;);title(&#39;fourier transforms of given signal&#39;);grid on;
+%Plot of Magnitude spectra
+subplot(2,2,3)
+plot(om,abs(FT),&#39;LineWidth&#39;,3)
+xlabel(&#39;omega&#39;);ylabel(&#39;magnitude&#39;);title(&#39;magnitude spectra of given signal&#39;);grid on;
+%Signal synthesized from Fourier coeffiecients
+syms t omeg
+Xjw=int(exp(-1i*omeg*t),-5,5);
+Xjw1=Xjw;
+om=-pi:(3.14/100):pi;
+Xjw=subs(Xjw,omeg,om);
+p=Xjw1*exp(1i*omeg*t);
+p=matlabFunction(p);
+it=(int(p(omeg,t),omeg))/(2*pi);
+u=(subs(it,omeg,100)-subs(it,omeg,-100))/2;
+u=subs(u,t,-7:0.01:7);
+idx=~any(isnan(u),1);
+t1=-7:0.01:7;
+subplot(2,2,4);plot(t1(idx),u(idx));
+xlabel(&#39;time t&#39;);
+ylabel(&#39;x(t)&#39;);
+title(&#39;Signal synthesized from Fourier coeffiecients&#39;);

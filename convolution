@@ -1,0 +1,76 @@
+function main()
+x=input('Enter the array x','s');
+llx=input('Enter the lower limit of x');
+ulx=input('Enter the upper limit of x');
+h=input('Enter the array h','s');
+llh=input('Enter the lower limit of h');
+ulh=input('Enter the upper limit of h');
+x=str2num(x);
+h=str2num(h);
+n=(llx+llh):(ulx+ulh);
+c=1;
+for i=n(1):n(length(n))
+    m=1;
+    y1=zeros(10);
+    for j=-10:10
+            temp=h1(h,llh,ulh,-j+i)*x1(x,llx,ulx,j);
+             if temp~=0
+                y1(1,m)=temp;
+                y1=y1(1:m);
+                b(1,m)=j;
+                b=b(1:m);
+                m=m+1;
+             end
+    end
+    y(1,c)=sum(y1);
+    figure(c);
+    stem(b,y1);
+    xlim([-5 5]);
+    xlabel('time');
+    ylabel('x(k)*h(-k+n)');
+    disp(y1);
+    c=c+1;
+end
+figure(c+1);
+stem(n,y);
+end
+function [x1]=x1(x,llx,ulx,i)
+     if i<=ulx && i>=llx
+        x1=x(i-llx+1);
+      else
+         x1=0;
+     end
+end
+function [h1]=h1(h,llh,ulh,i)
+     if i<=ulh && i>=llh
+        h1=h(i-llh+1);
+     else
+         h1=0;
+     end
+end
+%Lattice method
+x = input('Enter first input sequence x[n]: ');
+h = input('Enter second input sequence h[n]: ');
+t=zeros(length(x)+length(h)-1,length(h));
+for i=1:length(h)
+    for j=1:length(x)
+        y(i,j)=h(i)*x(j);
+    end
+end
+disp(' Discrete Linear Convolution')
+disp('By Lattice Method:');
+disp('Lattice:');
+disp(y);
+p=1;
+for i=1:length(h)
+    f=y(i,:);
+    f=f';
+    t(p:p+3,i)=f;
+    p=p+1;
+end
+y1=zeros(1,length(x)+length(h)-1);
+for i=1:length(y1)
+    y1(1,i)=sum(t(i,:));
+end
+disp('y[n]:');
+disp(y1);

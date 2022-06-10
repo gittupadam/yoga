@@ -1,63 +1,30 @@
-clc;
-clear all;
-close all;
-N=10;
-si=input(&#39;Enter your starting index:&#39;);
+clc
+clear all
+close all
 
-fi=input(&#39;Enter you final index:&#39;);
-n=si:fi;
-m=1;
-for h=si:fi
-if (h&gt;=-2)&amp;&amp;(h&lt;=2)
-x(m)=1;
-else
-x(m)=0;
-end
-m=m+1;
-end
-figure(1);
-stem(n,x,&#39;linewidth&#39;,2);
-xlabel(&#39;n&#39;);ylabel(&#39;x[n]&#39;);title(&#39;Given discrete periodic signal&#39;);grid
-on;
-l=1;
-t1=si:fi;
-for h=si:fi
-a(l)=0;
-z(l)=0;
-m=1;
-for j=si:fi
-a(l)=a(l)+x(m)*exp((-1*i*2*pi*h*j)/N);
-m=m+1;
-end
-a(l)=a(l)/N;
-ma(l)=sqrt(real(a(l)).^2 + imag(a(l)).^2);
-p(l)=atan(imag(ma(l))/real(ma(l)));
-l=l+1;
-end
-figure(2);
-stem(t1,a,&#39;linewidth&#39;,2);
-xlabel(&#39;k&#39;);ylabel(&#39;ak&#39;);title(&#39;Fourier coefficient&#39;);
-grid on;
-figure(3);
-stem(t1,ma,&#39;linewidth&#39;,2);
-xlabel(&#39;k&#39;);ylabel(&#39;|ak|&#39;);title(&#39;Magnitude spectrum of x[n]&#39;);
-grid on;
-figure(4);
-stem(t1,p,&#39;linewidth&#39;,2);
+t=[-5:0.1:5];
 
-xlabel(&#39;k&#39;);ylabel(&#39;ak&#39;);title(&#39;Phase plot&#39;);
-grid on;
-l=1;
-for j=si:fi
 m=1;
-z(l)=0;
-for h=0:9
-z(l)=z(l)+a(m)*exp((1*i*2*pi*h*j)/N);
-m=m+1;
+
+for x=-5:0.1:5
+    if (x>-5 && x<5)
+       y(m)=1;  
+   else
+       y(m)=0;
+   end
+   m=m+1;
 end
-l=l+1;
-end
-figure(5);
-stem(n,abs(z),&#39;linewidth&#39;,2);
-xlabel(&#39;n&#39;);ylabel(&#39;y[n]&#39;);title(&#39;Synthesis&#39;);grid on;
-grid on;
+subplot(2,1,1)
+plot(t,y)
+
+
+syms w T
+
+XjW=int((1*exp(-1i*w*T)),T,-20,20);
+
+y=subs(XjW,w,((-5*pi/7):0.01:(5*pi/7)));
+
+x=((-5*pi/7):0.01:(5*pi/7));
+
+subplot(2,1,2)
+plot(x,abs(y))
